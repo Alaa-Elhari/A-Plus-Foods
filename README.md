@@ -1,6 +1,6 @@
 # a_plus_foods
 
-A new Flutter project.
+A Scan and Shop Flutter application made with love by Alaa El-hari.
 
 ## Getting Started
 
