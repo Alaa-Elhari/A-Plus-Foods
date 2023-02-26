@@ -337,10 +337,17 @@ class Title extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'We have everthing that you need ',
-                    style: GoogleFonts.acme(
-                        color: Colors.blueAccent, fontSize: 25),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'We have everthing that you need ',
+                        style: GoogleFonts.acme(
+                            color: Colors.blueAccent, fontSize: 25),
+                      ),
+                    ],
                   ),
                 )
               ]),

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'home_view.dart';
 import 'login_view.dart';
 
-
 class Auth extends StatelessWidget {
   const Auth({super.key});
 
