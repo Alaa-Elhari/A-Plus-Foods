@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
@@ -6,45 +5,41 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart';
 import 'package:openfoodfacts/model/LoginStatus.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
-import 'package:openfoodfacts/utils/QueryType.dart';
-import 'package:openfoodfacts/utils/UriHelper.dart';
 
-import 'Home_view.dart';
+import 'home_view.dart';
 
-class LogininScreen extends StatefulWidget {
-  const LogininScreen({super.key});
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
 
   @override
-  State<LogininScreen> createState() => _LogininScreenState();
+  State<LoginView> createState() => _LoginViewState();
 }
 
-class _LogininScreenState extends State<LogininScreen> {
+class _LoginViewState extends State<LoginView> {
   final _emailController = TextEditingController();
-  final _PasswordController = TextEditingController();
-  //email color
-  Color ec = Colors.white;
-  //password color
-  Color pc = Colors.white;
-  bool bol = true;
+  final _passwordController = TextEditingController();
+  
+  Color emailColor = Colors.white;
+  Color passwordColor = Colors.white;
+  bool obscurePassword = true;
 
   bool loading = false;
-  final spinkit = const SpinKitDoubleBounce(
+  final spinKit = const SpinKitDoubleBounce(
     color: Colors.white,
     size: 20.0,
   );
 
   Future<LoginStatus?> check() async {
     if (_emailController.text.trim().isEmpty ||
-        _PasswordController.text.trim().isEmpty) {
+        _passwordController.text.trim().isEmpty) {
       return null;
     }
     User offUser = User(
         userId: _emailController.text.trim(),
-        password: _PasswordController.text.trim());
+        password: _passwordController.text.trim());
 
     return OpenFoodAPIClient.login2(offUser).then((value) {
       OpenFoodAPIConfiguration.globalUser = offUser;
@@ -60,7 +55,7 @@ class _LogininScreenState extends State<LogininScreen> {
   void dispose() {
     super.dispose();
     _emailController.dispose();
-    _PasswordController.dispose();
+    _passwordController.dispose();
   }
 
   @override
@@ -97,7 +92,7 @@ class _LogininScreenState extends State<LogininScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Container(
                     decoration: BoxDecoration(
-                        color: ec, borderRadius: BorderRadius.circular(12)),
+                        color: emailColor, borderRadius: BorderRadius.circular(12)),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: TextField(
@@ -117,19 +112,19 @@ class _LogininScreenState extends State<LogininScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Container(
                     decoration: BoxDecoration(
-                        color: pc, borderRadius: BorderRadius.circular(12)),
+                        color: passwordColor, borderRadius: BorderRadius.circular(12)),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: TextField(
-                          controller: _PasswordController,
-                          obscureText: bol,
+                          controller: _passwordController,
+                          obscureText: obscurePassword,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'Password',
                             suffixIcon: IconButton(
                                 onPressed: (() {
                                   setState(() {
-                                    bol = false;
+                                    obscurePassword = false;
                                   });
                                 }),
                                 icon: const Icon(Icons.remove_red_eye)),
@@ -159,11 +154,11 @@ class _LogininScreenState extends State<LogininScreen> {
                         firebase.FirebaseAuth.instance
                             .signInWithEmailAndPassword(
                                 email: _emailController.text.trim(),
-                                password: _PasswordController.text.trim());
+                                password: _passwordController.text.trim());
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (buildContext) => const HomeScreen()));
+                                builder: (buildContext) => const HomeView()));
                       }).catchError((error) {
                         var msg = SnackBar(
                           elevation: 0,
@@ -189,7 +184,7 @@ class _LogininScreenState extends State<LogininScreen> {
                           borderRadius: BorderRadius.circular(20)),
                       child: Center(
                           child: loading
-                              ? spinkit
+                              ? spinKit
                               : Text(
                                   'Sign IN ',
                                   style: GoogleFonts.robotoFlex(

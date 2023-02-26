@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Categorycard extends StatefulWidget {
+class CategoryCard extends StatefulWidget {
   final String title;
-  final String ImageUrl;
+  final String imageUrl;
 
-  const Categorycard({
+  const CategoryCard({
     super.key,
     required this.title,
-    required this.ImageUrl,
+    required this.imageUrl,
   });
 
   @override
-  State<Categorycard> createState() => _CategorycardState();
+  State<CategoryCard> createState() => _CategoryCardState();
 }
 
-class _CategorycardState extends State<Categorycard> {
+class _CategoryCardState extends State<CategoryCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,12 +41,13 @@ class _CategorycardState extends State<Categorycard> {
             Colors.black.withOpacity(0.35),
             BlendMode.multiply,
           ),
-          image: NetworkImage(widget.ImageUrl),
+          image: NetworkImage(widget.imageUrl),
           fit: BoxFit.cover,
         ),
       ),
       child: Stack(children: [
         Align(
+          alignment: Alignment.center,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5.0),
             child: Text(
@@ -57,7 +58,6 @@ class _CategorycardState extends State<Categorycard> {
               textAlign: TextAlign.center,
             ),
           ),
-          alignment: Alignment.center,
         ),
       ]),
     );

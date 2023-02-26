@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:openfoodfacts/interface/Parameter.dart';
-
 import 'package:openfoodfacts/model/parameter/SearchTerms.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
-import 'package:openfoodfacts/utils/ProductSearchQueryConfiguration.dart';
 
-import 'Product_view.dart';
+import 'product_view.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchView extends StatefulWidget {
+
+  const SearchView({super.key});
+
   @override
-  _SearchScreenState createState() => _SearchScreenState();
+  State<SearchView> createState() => _SearchViewState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class _SearchViewState extends State<SearchView> {
   final TextEditingController _searchController = TextEditingController();
   SearchResult? _searchResults;
 
@@ -54,7 +54,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 onPressed: () {
                   Navigator.of(context).pushReplacementNamed('HomeScreen');
                 },
-                icon: Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back),
                 label: Text(
                   "Back",
                   style: GoogleFonts.roboto(color: Colors.black, fontSize: 20),
@@ -106,7 +106,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => InformationProduct(
+                                  builder: (context) => ProductView(
                                     product: product,
                                   ),
                                 ),

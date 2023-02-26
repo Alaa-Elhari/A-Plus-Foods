@@ -7,23 +7,21 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:openfoodfacts/model/SignUpStatus.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
-import 'package:openfoodfacts/utils/QueryType.dart';
-import 'package:openfoodfacts/utils/UriHelper.dart';
 
-import 'Login_view.dart';
+import 'login_view.dart';
 
-class LoginUpScreen extends StatefulWidget {
-  const LoginUpScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginUpScreen> createState() => _SignupState();
+  State<SignupScreen> createState() => _SignupState();
 }
 
-class _SignupState extends State<LoginUpScreen> {
+class _SignupState extends State<SignupScreen> {
   final _nameController = TextEditingController();
   final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
-  final _PasswordController = TextEditingController();
+  final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   late Color k = Colors.white;
   bool loading = false;
@@ -36,14 +34,14 @@ class _SignupState extends State<LoginUpScreen> {
 
   Future<SignUpStatus?> register() async {
     if (_usernameController.text.trim().isEmpty ||
-        _PasswordController.text.trim().isEmpty ||
+        _passwordController.text.trim().isEmpty ||
         _nameController.text.trim().isEmpty ||
         _emailController.text.trim().isEmpty) {
       return null;
     }
     User offUser = User(
         userId: _usernameController.text.trim(),
-        password: _PasswordController.text.trim());
+        password: _passwordController.text.trim());
 
     return OpenFoodAPIClient.register(
             user: offUser,
@@ -57,13 +55,13 @@ class _SignupState extends State<LoginUpScreen> {
     });
   }
 
-  final spinkit = const SpinKitDoubleBounce(
+  final spinKit = const SpinKitDoubleBounce(
     color: Colors.white,
     size: 20.0,
   );
 
   bool confirm() {
-    if (_PasswordController.text.trim() ==
+    if (_passwordController.text.trim() ==
         _confirmPasswordController.text.trim()) {
       return true;
     } else {
@@ -79,7 +77,7 @@ class _SignupState extends State<LoginUpScreen> {
   void dispose() {
     super.dispose();
     _emailController.dispose();
-    _PasswordController.dispose();
+    _passwordController.dispose();
     _confirmPasswordController.dispose();
   }
 
@@ -95,7 +93,7 @@ class _SignupState extends State<LoginUpScreen> {
               children: [
                 //images
                 Image.asset(
-                  'images/iconapppic.jpg',
+                  'images/picfood.jpg',
                   height: 200,
                 ),
                 const SizedBox(
@@ -185,7 +183,7 @@ class _SignupState extends State<LoginUpScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: TextField(
-                        controller: _PasswordController,
+                        controller: _passwordController,
                         obscureText: bol,
                         decoration: InputDecoration(
                             border: InputBorder.none,
@@ -249,7 +247,7 @@ class _SignupState extends State<LoginUpScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (buildContext) =>
-                                      const LogininScreen()));
+                                      const LoginView()));
                         }).catchError((error) {
                           var msg = SnackBar(
                             elevation: 0,
@@ -282,7 +280,7 @@ class _SignupState extends State<LoginUpScreen> {
                             k = Colors.green;
                           } else {
                             k = Colors.red;
-                            const LoginUpScreen();
+                            const SignupScreen();
                           }
                         });
                         setState(() {
@@ -300,7 +298,7 @@ class _SignupState extends State<LoginUpScreen> {
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 67, 179, 159),
                           borderRadius: BorderRadius.circular(20)),
-                      child: Center(child: loading ? spinkit : t),
+                      child: Center(child: loading ? spinKit : t),
                     ),
                   ),
                 ),

@@ -1,48 +1,32 @@
 import 'dart:collection';
 
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:openfoodfacts/model/Nutrient.dart';
 import 'package:openfoodfacts/model/NutrientLevels.dart';
 import 'package:openfoodfacts/model/PerSize.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
-import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
-import 'package:openfoodfacts/utils/UnitHelper.dart';
 
-class InformationProduct extends StatelessWidget {
-  InformationProduct({super.key, required this.product});
-  Product? product;
+class ProductView extends StatelessWidget {
+  final Product? product;
+
+  const ProductView({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
-    return Productdetails(
+    return ProductDetails(
       product: product!,
     );
   }
 }
 
-class Productdetails extends StatelessWidget {
-  Productdetails({Key? key, required this.product}) : super(key: key);
-  Product product;
-  late Map<String, Level> map = product.nutrientLevels!.levels;
+class ProductDetails extends StatelessWidget {
+  final Product product;
 
-  Future<Status?> saveProduct(Product? product) async {
-    if (product == null) {
-      return null;
-    }
+  const ProductDetails({Key? key, required this.product}) : super(key: key);
 
-    if (OpenFoodAPIConfiguration.globalUser == null) {
-      return null;
-    }
-
-    return OpenFoodAPIClient.saveProduct(
-        OpenFoodAPIConfiguration.globalUser!, product);
-  }
-
-  List<DataRow> getNutirents(Product? product) {
+  List<DataRow> getNutrients(Product? product) {
     Map<String, double> hundredGram = {}, serving = {};
     List<DataRow> rows = [];
 
@@ -101,8 +85,7 @@ class Productdetails extends StatelessWidget {
               height: MediaQuery.of(context).size.height * .35,
               padding: const EdgeInsets.only(bottom: 30),
               width: double.infinity,
-              child: Image.network(
-                  '${product.imageFrontUrl ?? 'https://us.123rf.com/450wm/koblizeek/koblizeek1902/koblizeek190200055/125337077-no-image-vector-symbol-missing-available-icon-no-gallery-for-this-moment.jpg?ver=6'}'),
+              child: Image.network('${product.imageFrontUrl}'),
             ),
           ),
           Expanded(
@@ -181,62 +164,62 @@ class Productdetails extends StatelessWidget {
                         const SizedBox(height: 15),
                         Padding(
                           padding: const EdgeInsets.all(12),
-                          child: information(
-                            namedata: 'Quantity:',
+                          child: Details(
+                            name: 'Quantity:',
                             data: '${product.quantity ?? ''}',
                           ),
                         ),
-                        information(
-                          namedata: 'Packaging:',
-                          data: product.packaging ?? '',
+                        Details(
+                          name: 'Packaging:',
+                          data: '${product.packagings?.join(", ")}',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
-                        information(
-                          namedata: 'Brands:',
+                        Details(
+                          name: 'Brands:',
                           data: product.brands ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
-                        information(
-                          namedata: 'Labels, certifications, awards :',
+                        Details(
+                          name: 'Labels, certifications, awards :',
                           data: product.labels ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
-                        information(
-                          namedata: 'EMB code:',
+                        Details(
+                          name: 'EMB code:',
                           data: product.embCodes ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
-                        information(
-                          namedata: 'Brands:',
+                        Details(
+                          name: 'Brands:',
                           data: product.brands ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
-                        information(
-                          namedata: 'Stores:',
+                        Details(
+                          name: 'Stores:',
                           data: product.stores ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
-                        information(
-                          namedata: 'Countries where sold:',
+                        Details(
+                          name: 'Countries where sold:',
                           data: product.countries ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
-                        information(
-                          namedata: 'Barcode :',
+                        Details(
+                          name: 'Barcode :',
                           data: product.barcode ?? '',
                         ),
                         const SizedBox(
@@ -253,22 +236,22 @@ class Productdetails extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        information(
-                          namedata: 'Ingredients:',
+                        Details(
+                          name: 'Ingredients:',
                           data: product.ingredientsText ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
-                        information(
-                          namedata: 'Food processing',
-                          data: '${product.novaGroup ?? ''}',
+                        Details(
+                          name: 'Food processing',
+                          data: '${product.novaGroup}',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
-                        information(
-                          namedata: 'Additives',
+                        Details(
+                          name: 'Additives',
                           data: '${product.additives!.names}',
                         ),
                         const SizedBox(
@@ -287,14 +270,14 @@ class Productdetails extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        levelproduct(
-                          map: map,
-                          mapkey: 'sugars',
+                        ProductQuality(
+                          product: product,
+                          nutrient: 'sugars',
                         ),
                         Table(),
-                        levelproduct(map: map, mapkey: 'fat'),
-                        levelproduct(map: map, mapkey: 'saturated-fat'),
-                        levelproduct(map: map, mapkey: 'salt'),
+                        ProductQuality(product: product, nutrient: 'fat'),
+                        ProductQuality(product: product, nutrient: 'saturated-fat'),
+                        ProductQuality(product: product, nutrient: 'salt'),
                         const SizedBox(
                           height: 30,
                         ),
@@ -322,7 +305,7 @@ class Productdetails extends StatelessWidget {
                                           fontWeight: FontWeight.bold)),
                                 )),
                               ],
-                              rows: getNutirents(product),
+                              rows: getNutrients(product),
                             ),
                           ),
                         ),
@@ -354,99 +337,74 @@ class Productdetails extends StatelessWidget {
   }
 }
 
-class levelproduct extends StatelessWidget {
-  levelproduct({Key? key, required this.map, required this.mapkey})
+class ProductQuality extends StatelessWidget {
+  final String nutrient;
+  final Product? product;
+
+  const ProductQuality({Key? key, required this.nutrient, required this.product})
       : super(key: key);
-  Map map;
-  String mapkey;
-  @override
-  Widget build(BuildContext context) {
-    if (map[mapkey] == Level.HIGH) {
-      return Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: SizedBox(width: 50, child: Text(mapkey)),
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Container(
-              height: 40,
-              width: 40,
-              decoration: const BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.all(Radius.circular(18))),
-            ),
-          ),
-          Text("${mapkey} in high quantity "),
-        ],
-      );
-    } else if (map[mapkey] == Level.LOW) {
-      return Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: SizedBox(width: 50, child: Text(mapkey)),
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Container(
-              height: 40,
-              width: 40,
-              decoration: const BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.all(Radius.circular(18))),
-            ),
-          ),
-          const SizedBox(
-            width: 20,
-          ),
-          Text("${mapkey} in low quantity "),
-        ],
-      );
-    } else if (map[mapkey] == Level.MODERATE) {
-      return Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(15),
-            child: SizedBox(width: 50, child: Text(mapkey)),
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          Container(
+
+  Row createRow(String text, Color givenColor, double boxWidth) {
+    return Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: SizedBox(width: 50, child: Text(nutrient)),
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: Container(
             height: 40,
             width: 40,
-            decoration: const BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.all(Radius.circular(18))),
+            decoration: BoxDecoration(
+                color: givenColor,
+                borderRadius: const BorderRadius.all(Radius.circular(18))),
           ),
-          const SizedBox(
-            width: 10,
-          ),
-          Text("${mapkey} in moderate quantity "),
-        ],
-      );
-    } else {
-      return Container();
+        ),
+        SizedBox(
+          width: boxWidth,
+        ),
+        Text(text)
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    switch (product?.nutrientLevels?.levels[nutrient]) {
+      case Level.HIGH:
+        {
+          return createRow("$nutrient in High quantity!", Colors.red, 0);
+        }
+      case Level.MODERATE:
+        {
+          return createRow("$nutrient in Moderate quantity!", Colors.blue, 10);
+        }
+      case Level.LOW:
+        {
+          return createRow("$nutrient in Low quantity!", Colors.green, 20);
+        }
+      default:
+        {
+          return Container();
+        }
     }
   }
 }
 
-class information extends StatelessWidget {
-  const information({
+class Details extends StatelessWidget {
+
+  final String data;
+  final String name;
+
+  const Details({
     Key? key,
-    required this.namedata,
+    required this.name,
     required this.data,
   }) : super(key: key);
-  final String data;
-  final String namedata;
 
   @override
   Widget build(BuildContext context) {
@@ -456,7 +414,7 @@ class information extends StatelessWidget {
         SizedBox(
           width: 100,
           child: Text(
-            namedata,
+            name,
             style: GoogleFonts.poppins(
               fontSize: 16,
               fontWeight: FontWeight.w600,
