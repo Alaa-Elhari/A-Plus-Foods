@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:a_plus_foods/Screen/Home_view.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 
@@ -13,6 +12,8 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:openfoodfacts/utils/UriHelper.dart';
+
+import 'Home_view.dart';
 
 class LogininScreen extends StatefulWidget {
   const LogininScreen({super.key});
@@ -74,7 +75,7 @@ class _LogininScreenState extends State<LogininScreen> {
               children: [
                 //images
                 Image.asset(
-                  'images/picfood.jpg',
+                  'images/iconapppic.jpg',
                   height: 200,
                 ),
                 const SizedBox(

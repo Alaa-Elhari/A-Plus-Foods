@@ -1,10 +1,10 @@
-import 'package:a_plus_foods/Screen/Login_view.dart';
-import 'package:a_plus_foods/Screen/Search_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'Screen/Auth.dart';
 import 'Screen/Home_view.dart';
+import 'Screen/Login_view.dart';
+import 'Screen/Search_view.dart';
 import 'Screen/SignUp_view.dart';
 
 void main() async {

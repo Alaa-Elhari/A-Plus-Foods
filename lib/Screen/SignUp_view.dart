@@ -1,5 +1,5 @@
-import 'package:a_plus_foods/Screen/Login_view.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase;
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +9,8 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/QueryType.dart';
 import 'package:openfoodfacts/utils/UriHelper.dart';
+
+import 'Login_view.dart';
 
 class LoginUpScreen extends StatefulWidget {
   const LoginUpScreen({super.key});
@@ -93,7 +95,7 @@ class _SignupState extends State<LoginUpScreen> {
               children: [
                 //images
                 Image.asset(
-                  'images/picfood.jpg',
+                  'images/iconapppic.jpg',
                   height: 200,
                 ),
                 const SizedBox(

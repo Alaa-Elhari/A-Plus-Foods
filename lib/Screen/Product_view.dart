@@ -70,7 +70,7 @@ class Productdetails extends StatelessWidget {
       rows.add(DataRow(cells: [
         DataCell(Text(key)),
         DataCell(Text('$value')),
-        DataCell(Text('${sortedServing[key]}'))
+        DataCell(Text('${sortedServing[key] ?? 0}'))
       ]));
     });
     return rows;
@@ -101,7 +101,8 @@ class Productdetails extends StatelessWidget {
               height: MediaQuery.of(context).size.height * .35,
               padding: const EdgeInsets.only(bottom: 30),
               width: double.infinity,
-              child: Image.network('${product.imageFrontUrl}'),
+              child: Image.network(
+                  '${product.imageFrontUrl ?? 'https://us.123rf.com/450wm/koblizeek/koblizeek1902/koblizeek190200055/125337077-no-image-vector-symbol-missing-available-icon-no-gallery-for-this-moment.jpg?ver=6'}'),
             ),
           ),
           Expanded(
@@ -161,7 +162,7 @@ class Productdetails extends StatelessWidget {
                         ),
                         const SizedBox(height: 15),
                         Text(
-                          '${product.created}',
+                          '${product.created ?? ''}',
                           style: GoogleFonts.poppins(
                             fontSize: 15,
                             color: Colors.grey,
@@ -182,61 +183,61 @@ class Productdetails extends StatelessWidget {
                           padding: const EdgeInsets.all(12),
                           child: information(
                             namedata: 'Quantity:',
-                            data: '${product.quantity}',
+                            data: '${product.quantity ?? ''}',
                           ),
                         ),
                         information(
                           namedata: 'Packaging:',
-                          data: '${product.packaging}',
+                          data: product.packaging ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         information(
                           namedata: 'Brands:',
-                          data: '${product.brands}',
+                          data: product.brands ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         information(
                           namedata: 'Labels, certifications, awards :',
-                          data: '${product.labels}',
+                          data: product.labels ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         information(
                           namedata: 'EMB code:',
-                          data: '${product.embCodes}',
+                          data: product.embCodes ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         information(
                           namedata: 'Brands:',
-                          data: '${product.brands}',
+                          data: product.brands ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         information(
                           namedata: 'Stores:',
-                          data: '${product.stores}',
+                          data: product.stores ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         information(
                           namedata: 'Countries where sold:',
-                          data: '${product.countries}',
+                          data: product.countries ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         information(
                           namedata: 'Barcode :',
-                          data: '${product.barcode}',
+                          data: product.barcode ?? '',
                         ),
                         const SizedBox(
                           height: 20,
@@ -254,14 +255,14 @@ class Productdetails extends StatelessWidget {
                         ),
                         information(
                           namedata: 'Ingredients:',
-                          data: '${product.ingredientsText}',
+                          data: product.ingredientsText ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         information(
                           namedata: 'Food processing',
-                          data: '${product.novaGroup}',
+                          data: '${product.novaGroup ?? ''}',
                         ),
                         const SizedBox(
                           height: 20,
