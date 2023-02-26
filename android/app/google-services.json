@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "67769605419",
-    "project_id": "auth-project-2a5f8",
-    "storage_bucket": "auth-project-2a5f8.appspot.com"
+    "project_number": "445821735295",
+    "project_id": "a-plus-foods",
+    "storage_bucket": "a-plus-foods.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:67769605419:android:2b7bc7362530678577796e",
+        "mobilesdk_app_id": "1:445821735295:android:817cf94bc9748c41304a4a",
         "android_client_info": {
           "package_name": "com.example.a_plus_foods"
         }
       },
       "oauth_client": [
         {
-          "client_id": "67769605419-ecrh9tmnanlmc41sp4mbq9olk0m9hben.apps.googleusercontent.com",
+          "client_id": "445821735295-adlma83u5b3s5dccano21s5pkl63ncl9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBRtgRXv2zVSAXujgqblurJncske5ZEW6A"
+          "current_key": "AIzaSyCVuUGr7_NlirlodBH255phl4hTy7Iohr8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "67769605419-ecrh9tmnanlmc41sp4mbq9olk0m9hben.apps.googleusercontent.com",
+              "client_id": "445821735295-adlma83u5b3s5dccano21s5pkl63ncl9.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "445821735295-cpc42koo2smip11r5ejsokhhm7prps82.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.aPlusFoods"
+              }
             }
           ]
         }

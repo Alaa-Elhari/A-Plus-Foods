@@ -1,19 +1,21 @@
-import 'package:a_plus_foods/Screen/Product_view.dart';
+import 'package:a_plus_foods/Screen/product_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
+import 'package:a_plus_foods/Tools/product.dart';
 
-class Listproduct extends StatefulWidget {
-  const Listproduct({super.key});
+class ProductList extends StatefulWidget {
+  const ProductList({super.key});
 
   @override
-  State<Listproduct> createState() => _ListproductState();
+  State<ProductList> createState() => _ProductListState();
 }
 
-class _ListproductState extends State<Listproduct> {
-  Future<SearchResult> getdata() async {
+class _ProductListState extends State<ProductList> {
+
+  Future<SearchResult> fetchData() async {
     ProductSearchQueryConfiguration configuration =
         ProductSearchQueryConfiguration(
       parametersList: <Parameter>[
@@ -32,30 +34,30 @@ class _ListproductState extends State<Listproduct> {
     return FutureBuilder(
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Container(
+          return const SizedBox(
             width: 50,
-            child: const Center(
-              child: const CircularProgressIndicator.adaptive(),
+            child: Center(
+              child: CircularProgressIndicator.adaptive(),
             ),
           );
         }
         if (snapshot.hasError) {
           return Text(snapshot.error.toString());
         } else {
-          return ProductView(
+          return ProductsView(
             result: snapshot.data,
           );
         }
       },
-      future: getdata(),
+      future: fetchData(),
     );
   }
 }
 
-class ProductView extends StatelessWidget {
-  SearchResult? result;
+class ProductsView extends StatelessWidget {
+  final SearchResult? result;
 
-  ProductView({Key? key, required this.result}) : super(key: key);
+  const ProductsView({Key? key, required this.result}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -121,10 +123,14 @@ class ProductView extends StatelessWidget {
                     ),
                     onTap: () {
                       var product = result?.products?[index];
+
+                      ProductData(OpenFoodAPIConfiguration.globalUser?.userId)
+                          .saveProduct(product)
+                          .loadProducts();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => InformationProduct(
+                          builder: (context) => ProductView(
                             product: product,
                           ),
                         ),

@@ -1,10 +1,8 @@
-import 'package:a_plus_foods/Screen/Login_view.dart';
-import 'package:a_plus_foods/Tools/Category.dart';
-import 'package:a_plus_foods/Tools/ListProduct.dart';
+import 'package:a_plus_foods/Screen/login_view.dart';
+import 'package:a_plus_foods/Tools/category.dart';
+import 'package:a_plus_foods/Tools/product_list.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,18 +11,18 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
 
-import 'Categorylistproduct_view.dart';
-import 'Product_view.dart';
-import 'Veganproducts.dart';
+import 'category_view.dart';
+import 'product_view.dart';
+import 'vegan_products_view.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeView extends StatefulWidget {
+  const HomeView({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeViewState extends State<HomeView> {
   Future<String> scanBarcode() async {
     return FlutterBarcodeScanner.scanBarcode(
         "#ff6666", "cancel", true, ScanMode.BARCODE);
@@ -71,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       context,
                       MaterialPageRoute(
                           builder: (builderContext) =>
-                              Productdetails(product: searchResult.product!)));
+                              ProductDetails(product: searchResult.product!)));
                 });
               }).onError((error, trace) {
                 var msg = SnackBar(
@@ -100,10 +98,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 OpenFoodAPIConfiguration.globalUser = null;
               }
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (contex) => const LogininScreen()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (contex) => const LoginView()));
             },
             icon: const Icon(
               Icons.output_sharp,
@@ -138,17 +134,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: const [
-                    const Text(
+                    Text(
                       'Category',
                       style: TextStyle(fontSize: 20, color: Colors.black),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 200,
                     ),
                   ],
                 ),
               ),
-              Listcategory(),
+              CategoryList(),
               const SizedBox(
                 height: 10,
               ),
@@ -166,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 400, width: 500, child: Listproduct()),
+              const SizedBox(height: 400, width: 500, child: ProductList()),
               const SizedBox(
                 height: 10,
               ),
@@ -187,11 +183,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                   height: 400,
                   width: 500,
-                  child: VagenProducts(
-                    State: VeganStatus.VEGAN,
+                  child: VeganProductsView(
+                    state: VeganStatus.VEGAN,
                   )),
             ]),
       ),
@@ -199,11 +195,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class Listcategory extends StatelessWidget {
-  Listcategory({
+class CategoryList extends StatelessWidget {
+
+  CategoryList({
     Key? key,
   }) : super(key: key);
-  late List Listcategoryimage = [
+
+  final List categoryImages = [
     'https://img.freepik.com/free-photo/composition-fruit-juices-black-background_23-2148227598.jpg',
     'https://media.premiumtimesng.com/wp-content/files/2022/01/Mashed-350x250.jpg',
     'https://c8.alamy.com/comp/DH8N1X/bottles-of-hard-liquor-whiskey-rum-vodka-DH8N1X.jpg',
@@ -242,8 +240,8 @@ class Listcategory extends StatelessWidget {
     'https://www.mashed.com/img/gallery/the-most-popular-chocolate-brands-ranked-worst-to-best/l-intro-1619705276.jpg',
     'https://thumbs.dreamstime.com/b/various-varieties-ice-cream-cones-various-varieties-ice-cream-cones-mint-blueberry-strawberry-pistachio-cherry-158155767.jpg',
   ];
-  late List<PnnsGroup2> list = PnnsGroup2.values.toList();
-  late List listcategorytitle = [
+  final List<PnnsGroup2> list = PnnsGroup2.values.toList();
+  final List categoryTitles = [
     'FRUIT JUICES', //
     'SWEETENED BEVERAGES', //
     'ALCOHOLIC BEVERAGES', //
@@ -288,26 +286,26 @@ class Listcategory extends StatelessWidget {
     return SizedBox(
       height: 150,
       child: ListView.builder(
-          itemCount: Listcategoryimage.length,
+          itemCount: categoryImages.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext context, int index) {
             return SizedBox(
               width: 400,
               child: ListTile(
-                title: Categorycard(
-                  ImageUrl: '${Listcategoryimage[index]}',
-                  title: " ${listcategorytitle[index]}",
+                title: CategoryCard(
+                  imageUrl: '${categoryImages[index]}',
+                  title: " ${categoryTitles[index]}",
                 ),
                 onTap: () {
-                  String NameCategory = listcategorytitle[index];
-                  String Imagecategory = Listcategoryimage[index];
+                  String nameCategory = categoryTitles[index];
+                  String imageCategory = categoryImages[index];
                   var category = list[index];
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Listofcategoryproduct(
-                        namecategory: NameCategory,
-                        imagecategory: Imagecategory,
+                      builder: (context) => CategoryView(
+                        name: nameCategory,
+                        image: imageCategory,
                         category: category,
                       ),
                     ),

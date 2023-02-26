@@ -1,11 +1,11 @@
-import 'package:a_plus_foods/Screen/Login_view.dart';
-import 'package:a_plus_foods/Screen/Search_view.dart';
+import 'package:a_plus_foods/Screen/login_view.dart';
+import 'package:a_plus_foods/Screen/search_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'Screen/Auth.dart';
-import 'Screen/Home_view.dart';
-import 'Screen/SignUp_view.dart';
+import 'Screen/authentication.dart';
+import 'Screen/home_view.dart';
+import 'Screen/signup_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,13 +24,13 @@ class Screen extends StatelessWidget {
       theme: ThemeData(
           primaryColor: Colors.white,
           primarySwatch: Colors.grey,
-          textTheme: TextTheme(bodyText2: TextStyle(color: Colors.black))),
+          textTheme: const TextTheme(bodyMedium: TextStyle(color: Colors.black))),
       routes: {
         '/': (context) => const Auth(),
-        'HomeScreen': (context) => const HomeScreen(),
-        'signupScreen': (context) => const LoginUpScreen(),
-        'loginScreen': (context) => const LogininScreen(),
-        'SearchScreen': (context) => SearchScreen(),
+        'HomeScreen': (context) => const HomeView(),
+        'signupScreen': (context) => const SignupScreen(),
+        'loginScreen': (context) => const LoginView(),
+        'SearchScreen': (context) => const SearchView(),
       },
     );
   }
