@@ -1,4 +1,3 @@
-import 'package:a_plus_foods/Screen/login_view.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,6 +5,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:openfoodfacts/model/SignUpStatus.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
+
+import 'login_view.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});

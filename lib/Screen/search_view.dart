@@ -86,6 +86,9 @@ class _SearchViewState extends State<SearchView> {
             },
             child: const Text('Search'),
           ),
+          const SizedBox(
+            height: 30,
+          ),
           FutureBuilder(
               future: searchProductsByName(_searchController.text.trim()),
               builder: ((context, snapshot) {
@@ -118,7 +121,8 @@ class _SearchViewState extends State<SearchView> {
                 } else if (_searchResults == null) {
                   return Container();
                 } else {
-                  return const CircularProgressIndicator.adaptive();
+                  return const Center(
+                      child: CircularProgressIndicator.adaptive());
                 }
               }))
         ],

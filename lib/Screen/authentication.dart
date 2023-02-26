@@ -1,7 +1,9 @@
-import 'package:a_plus_foods/Screen/home_view.dart';
-import 'package:a_plus_foods/Screen/login_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'home_view.dart';
+import 'login_view.dart';
+
 
 class Auth extends StatelessWidget {
   const Auth({super.key});

@@ -1,14 +1,23 @@
+<<<<<<< HEAD:lib/Tools/product_list.dart
+import 'package:a_plus_foods/Screen/product_view.dart';
+=======
+>>>>>>> c2113083cbc7d17601fb15117aca10a8fc376f29:lib/Tools/ListProduct.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:foods/Tools/product.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
+import 'package:a_plus_foods/Tools/product.dart';
 
-import '../Screen/product_view.dart';
-
+<<<<<<< HEAD:lib/Tools/product_list.dart
 class ProductList extends StatefulWidget {
   const ProductList({super.key});
+=======
+import '../Screen/Product_view.dart';
+
+class Listproduct extends StatefulWidget {
+  const Listproduct({super.key});
+>>>>>>> c2113083cbc7d17601fb15117aca10a8fc376f29:lib/Tools/ListProduct.dart
 
   @override
   State<ProductList> createState() => _ProductListState();

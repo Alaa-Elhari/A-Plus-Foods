@@ -1,6 +1,3 @@
-import 'package:a_plus_foods/Screen/login_view.dart';
-import 'package:a_plus_foods/Tools/category.dart';
-import 'package:a_plus_foods/Tools/product_list.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +8,10 @@ import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
 
+import '../Tools/category.dart';
+import '../Tools/product_list.dart';
 import 'category_view.dart';
+import 'login_view.dart';
 import 'product_view.dart';
 import 'vegan_products_view.dart';
 

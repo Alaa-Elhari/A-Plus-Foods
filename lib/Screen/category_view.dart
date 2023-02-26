@@ -1,9 +1,10 @@
-import 'package:a_plus_foods/Tools/product_list.dart';
 import 'package:flutter/material.dart';
 import 'package:openfoodfacts/model/parameter/PnnsGroup2Filter.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
 import 'package:openfoodfacts/utils/PnnsGroups.dart';
+
+import '../Tools/product_list.dart';
 
 class CategoryView extends StatelessWidget {
 

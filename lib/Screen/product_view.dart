@@ -54,7 +54,7 @@ class ProductDetails extends StatelessWidget {
       rows.add(DataRow(cells: [
         DataCell(Text(key)),
         DataCell(Text('$value')),
-        DataCell(Text('${sortedServing[key]}'))
+        DataCell(Text('${sortedServing[key] ?? 0}'))
       ]));
     });
     return rows;
@@ -145,7 +145,7 @@ class ProductDetails extends StatelessWidget {
                         ),
                         const SizedBox(height: 15),
                         Text(
-                          '${product.created}',
+                          '${product.created ?? ''}',
                           style: GoogleFonts.poppins(
                             fontSize: 15,
                             color: Colors.grey,
@@ -166,7 +166,7 @@ class ProductDetails extends StatelessWidget {
                           padding: const EdgeInsets.all(12),
                           child: Details(
                             name: 'Quantity:',
-                            data: '${product.quantity}',
+                            data: '${product.quantity ?? ''}',
                           ),
                         ),
                         Details(
@@ -178,49 +178,49 @@ class ProductDetails extends StatelessWidget {
                         ),
                         Details(
                           name: 'Brands:',
-                          data: '${product.brands}',
+                          data: product.brands ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         Details(
                           name: 'Labels, certifications, awards :',
-                          data: '${product.labels}',
+                          data: product.labels ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         Details(
                           name: 'EMB code:',
-                          data: '${product.embCodes}',
+                          data: product.embCodes ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         Details(
                           name: 'Brands:',
-                          data: '${product.brands}',
+                          data: product.brands ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         Details(
                           name: 'Stores:',
-                          data: '${product.stores}',
+                          data: product.stores ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         Details(
                           name: 'Countries where sold:',
-                          data: '${product.countries}',
+                          data: product.countries ?? '',
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         Details(
                           name: 'Barcode :',
-                          data: '${product.barcode}',
+                          data: product.barcode ?? '',
                         ),
                         const SizedBox(
                           height: 20,
@@ -238,7 +238,7 @@ class ProductDetails extends StatelessWidget {
                         ),
                         Details(
                           name: 'Ingredients:',
-                          data: '${product.ingredientsText}',
+                          data: product.ingredientsText ?? '',
                         ),
                         const SizedBox(
                           height: 20,

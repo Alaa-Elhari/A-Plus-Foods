@@ -1,5 +1,4 @@
 
-import 'package:a_plus_foods/Screen/home_view.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 
@@ -9,6 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:openfoodfacts/model/LoginStatus.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:openfoodfacts/utils/OpenFoodAPIConfiguration.dart';
+
+import 'home_view.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -69,7 +70,7 @@ class _LoginViewState extends State<LoginView> {
               children: [
                 //images
                 Image.asset(
-                  'images/picfood.jpg',
+                  'images/iconapppic.jpg',
                   height: 200,
                 ),
                 const SizedBox(
